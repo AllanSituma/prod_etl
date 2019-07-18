@@ -1,0 +1,21 @@
+{{
+    config(
+        materialized='incremental',
+        schema='data_science'
+    )
+}}
+
+
+
+SELECT 
+DISTINCT ON (transaction_code)raw_sms.*
+FROM raw_sms 
+WHERE payment_type = 'sent'
+AND paybill IS NOT NULL
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+  AND  created_at > (select max(created_at) from {{ this }})
+
+{% endif %}
