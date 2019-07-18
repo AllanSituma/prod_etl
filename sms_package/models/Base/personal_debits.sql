@@ -10,12 +10,11 @@
 
 SELECT DISTINCT ON (transaction_code) raw_sms.*
 FROM raw_sms 
+WHERE  split_part(recipient,' ',3)  LIKE '%07%'
+OR split_part(recipient,' ',4)  LIKE '%07%'
 {% if is_incremental() %}
 
-WHERE created_at > (SELECT MAX(created_at) FROM {{this}})
+  -- this filter will only be applied on an incremental run
+AND created_at > (SELECT MAX(created_at) FROM {{this}})
 
 {% endif %}
-
-AND  split_part(recipient,' ',3)  LIKE '%07%'
-OR split_part(recipient,' ',4)  LIKE '%07%'
-
