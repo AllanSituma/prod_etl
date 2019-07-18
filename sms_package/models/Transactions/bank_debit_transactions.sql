@@ -27,7 +27,7 @@ OR lower(split_part(paybill,' ',2)) = 'chase'
 OR lower(split_part(recipient,' ',2)) = 'cfc'
 OR UPPER(split_part(recipient,' ',1)) = 'CBA'
 OR lower(split_part(recipient,' ',1)) = 'ecobank'
-OR lower(split_part(sender,' ',1)) = 'gulf'),
+OR lower(split_part(sender,' ',1)) = 'gulf'
 
 {% if is_incremental() %}
 

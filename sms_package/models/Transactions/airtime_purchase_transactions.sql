@@ -11,7 +11,7 @@ SELECT DISTINCT ON (transaction_code)user_id,
 	     transaction_date,
        created_at 
 FROM raw_sms
-WHERE q1.payment_type = 'airtime'
+WHERE payment_type = 'airtime'
 
 {% if is_incremental() %}
 

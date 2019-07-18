@@ -72,13 +72,11 @@ sacco_withdraw as (
 
 
 all_clients as (
-    SELECT lf."ClientID" user_id,
-           lf."NonPerformingLoans" npl
-    FROM loan_first lf
+    SELECT DISTINCT ON (lf.user_id) user_id
+    FROM raw_sms lf
 )
 
 SELECT DISTINCT ON (ac.user_id) ac.user_id,
-        ac.npl,
         ap.max_purchased_airtime,
 	    ap.total_airtime_purchase,
 	    ap.num_airtime_purchases,
