@@ -1,7 +1,8 @@
 {{
     config(
         materialized='table',
-        schema='data_science'
+        schema='data_science',
+		post_hook='create index if not exists {{ this.name }}__index_on_user_id on {{ this }} ("user_id")'
     )
 }}
 
