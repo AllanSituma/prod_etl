@@ -5,7 +5,8 @@
     )
 }}
 
-SELECT DISTINCT ON (transaction_code) raw_sms.*
+SELECT DISTINCT ON (transaction_code)
+raw_sms.*
 FROM raw_sms
 
 {% if is_incremental() %}
