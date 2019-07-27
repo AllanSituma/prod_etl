@@ -5,7 +5,8 @@
     )
 }}
 
-SELECT DISTINCT ON (transaction_code) raw_sms.*
+SELECT DISTINCT ON (transaction_code)
+raw_sms.*
 FROM raw_sms
 WHERE  sender is not null
 AND split_part(sender,' ',1) != 'Lipa'
