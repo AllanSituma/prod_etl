@@ -1,11 +1,13 @@
 {{
     config(
         materialized='incremental',
-        schema='data_science'
+        schema='data_science',
+        post_hook='create index if not exists {{ this.name }}__index_on_user_id on {{ this }} ("user_id")'
     )
 }}
 
-SELECT DISTINCT ON (transaction_code) raw_sms.*
+SELECT DISTINCT ON (transaction_code)
+raw_sms.*
 FROM raw_sms
 WHERE  sender is not null
 AND split_part(sender,' ',1) != 'Lipa'
